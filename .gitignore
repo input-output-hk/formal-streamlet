@@ -1,0 +1,7 @@
+# Agda
+*.agdai
+src/html/*.md
+src/html/*.html
+
+# emacs
+*~
