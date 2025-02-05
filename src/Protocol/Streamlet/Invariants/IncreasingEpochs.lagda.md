@@ -6,7 +6,7 @@ open import Hash
 
 open import Protocol.Streamlet.Assumptions
 
-module Protocol.Streamlet.Invariants.IncreasingEpochs (⋯ : _) (open Assumptions ⋯) where
+module @0 Protocol.Streamlet.Invariants.IncreasingEpochs (⋯ : _) (open Assumptions ⋯) where
 
 open import Protocol.Streamlet ⋯
   hiding (vch; vch′)

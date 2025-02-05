@@ -7,7 +7,7 @@ open import Prelude hiding (ℓ)
 open import Hash
 open import Protocol.Streamlet.Assumptions
 
-module Protocol.Streamlet.Consistency (⋯ : _) (open Assumptions ⋯) where
+module @0 Protocol.Streamlet.Consistency (⋯ : _) (open Assumptions ⋯) where
 
 open import Protocol.Streamlet ⋯
   hiding (vch; vch′; ls; ms; ms′)

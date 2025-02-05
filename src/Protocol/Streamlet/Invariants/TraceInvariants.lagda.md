@@ -6,7 +6,7 @@ open import Hash
 
 open import Protocol.Streamlet.Assumptions
 
-module Protocol.Streamlet.Invariants.TraceInvariants (⋯ : _) (open Assumptions ⋯) where
+module @0 Protocol.Streamlet.Invariants.TraceInvariants (⋯ : _) (open Assumptions ⋯) where
 
 open import Protocol.Streamlet ⋯
 open import Protocol.Streamlet.Invariants.History ⋯
