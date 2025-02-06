@@ -233,7 +233,7 @@ module _ {e : Epoch} (let L = epochLeader e) {ls : LocalState} where
 
   VoteBlock? : ∀ p ch txs →
     let
-      b  = ⟨ H , e , txs ⟩
+      b  = ⟨ ch ♯ , e , txs ⟩
       mᵖ = Propose $ signBlock L b
       m  = Vote    $ signBlock p b
     in
@@ -274,7 +274,7 @@ module _ {s : GlobalState} where
     Propose? _ _ ⦃ refl ⦄ {p}{q}{r} =
       LocalStep $ ProposeBlock? _ _ {p}{q}{r}
 
-    Vote? : ∀ ch txs → let open ∣VoteBlock∣ p s H txs in
+    Vote? : ∀ ch txs → let open ∣VoteBlock∣ p s ch txs in
       {m∈ : auto∶ AnyFirst (Mᵖ ≡_) (ls .inbox)}
       {_ : auto∶ signBlock L B ∉ map _∙signedBlock (ls .db)}
       {_ : auto∶ ls .phase ≡ Ready}

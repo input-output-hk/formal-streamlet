@@ -156,10 +156,10 @@ increasingEpochs′ {s′} Rs₀@(_ , refl , (_ ⟨ s→ ∣ s ⟩←— tr))
 
       QED≤ : b .epoch ≤ E
       QED≤ = noFutureVotes≤ Rs ≪p∈
-  QED | ⟫ VoteBlock {H = H} {txs = txs} {ch = ch↓} M∈ _ ph≡ p″≢L (_ , mkLongest∈ lch) (_ ∷ _ ⊣ B↝)
+  QED | ⟫ VoteBlock {ch = ch↓} {txs = txs} M∈ _ ph≡ p″≢L (_ , mkLongest∈ lch) (_ ∷ _ ⊣ B↝)
     = ≪QED
     where
-    open ∣VoteBlock∣ p″ s H txs
+    open ∣VoteBlock∣ p″ s ch↓ txs
 
     E≡ : b .epoch ≡ b′ .epoch → b ≡ b′
     E≡ = votedOnlyOncePerEpoch Rs₀ p∈ p∈′

@@ -101,7 +101,7 @@ noFutureVotes≤ {s′} (_ , refl , (_ ⟨ s→ ∣ s ⟩←— tr))
     with b ≟ ⟨ ch ♯ , s .e-now , txs ⟩
   ... | yes refl = Nat.≤-refl
   ... | no  _    = IH p∈
-  QED | ⟫ VoteBlock {H = H} {txs = txs} M∈ _ _ _ _ _
+  QED | ⟫ VoteBlock {ch = ch} {txs = txs} M∈ _ _ _ _ _
     with p ≟ p′
   ... | no p≢ rewrite lookup✖ p≢
     = IH p∈′
@@ -109,7 +109,7 @@ noFutureVotes≤ {s′} (_ , refl , (_ ⟨ s→ ∣ s ⟩←— tr))
     p∈′ : p ∈ voteIds (s .history) b
     p∈′ = voteIds-∷˘ {ms = s .history} (Eq.≢-sym p≢) p∈
   ... | yes refl rewrite lookup✓
-    with b ≟ ⟨ H , s .e-now , txs ⟩
+    with b ≟ ⟨ ch ♯ , s .e-now , txs ⟩
   ... | yes refl = Nat.≤-refl
   ... | no  _    = IH p∈
   QED | ⟫ RegisterVote _ _ = IH p∈
@@ -168,7 +168,7 @@ noFutureVotes≢ {s′} (_ , refl , (_ ⟨ s→ ∣ s ⟩←— tr))
     where
     p∈′ : p ∈ voteIds (s .history) b
     p∈′ = voteIds-∷˘ {ms = s .history} (Eq.≢-sym p≢) p∈
-  QED | ⟫ VoteBlock {H = H} {txs = txs} M∈ _ _ _ _ _
+  QED | ⟫ VoteBlock {txs = txs} M∈ _ _ _ _ _
     with p ≟ p′
   ... | yes refl rewrite lookup✓
     = ⊥-elim (case ph≡ of λ ())

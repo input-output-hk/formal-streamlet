@@ -113,10 +113,10 @@ module ∣ProposeBlock∣ p ⦃ _ : Honest p ⦄ s ch txs where
   SB  = signBlock p B
   M   = Propose SB
   ≪db = (s ＠ p) .db
-module ∣VoteBlock∣ p ⦃ _ : Honest p ⦄ s H txs where
+module ∣VoteBlock∣ p ⦃ _ : Honest p ⦄ s (ch : Chain) txs where
   E   = s .e-now
   L   = E .epochLeader
-  B   = ⟨ H , E , txs ⟩
+  B   = ⟨ ch ♯ , E , txs ⟩
   SB  = signBlock p B
   SBᵖ = signBlock L B
   M   = Vote    SB

@@ -18,7 +18,7 @@ open import Protocol.Streamlet.Invariants.VotedOnlyOnce ⋯
 ```agda
 blockVoted : (p ▷ e ⊢ ls —[ mm ]→ ls′) → Maybe (Block × Chain)
 blockVoted {e = e} = λ where
-  (VoteBlock {H = H} {txs = txs} {ch = ch} _ _ _ _ _ _) → just (⟨ H , e , txs ⟩ , ch)
+  (VoteBlock {ch = ch} {txs = txs} _ _ _ _ _ _) → just (⟨ ch ♯ , e , txs ⟩ , ch)
   (ProposeBlock {ch = ch} {txs = txs} _ _ _ _) → just (⟨ ch ♯ , e , txs ⟩ , ch)
   _ → nothing
 
@@ -57,20 +57,20 @@ hasVoted˘ {s′} (_ , init , (_ ⟨ st ∣ s ⟩←— tr))
   QED | ⟫ ProposeBlock {ch = ch↓} {txs = txs} _ refl _ _
       | ⟫ there st∈
       = voteIds-there b $ IH st∈
-  QED | ⟫ VoteBlock {H = H} {txs = txs} {ch = ch↓} _ _ _ _ _ _
+  QED | ⟫ VoteBlock {ch = ch↓} {txs = txs} _ _ _ _ _ _
       | ⟫ there st∈
       = ≪QED
     where
-    open ∣VoteBlock∣ p′ s H txs
+    open ∣VoteBlock∣ p′ s ch↓ txs
 
     ≪QED : p ∈ voteIds (M ∷ s .history) b
     ≪QED with b ≟ B
     ... | no  _ = IH st∈
     ... | yes _ = there $ IH st∈
-  QED | ⟫ VoteBlock {H = H} {txs = txs} _ _ _ _ _ _
+  QED | ⟫ VoteBlock {ch = ch} {txs = txs} _ _ _ _ _ _
       | ⟫ here (refl , refl , M.Any.just refl)
       = voteIds-here {m = M} refl refl
-      where open ∣VoteBlock∣ p′ s H txs
+      where open ∣VoteBlock∣ p′ s ch txs
 ... | DishonestLocalStep _ _
   = voteIds-there b $ IH st∈
 
@@ -112,10 +112,10 @@ hasVoted {s′} (_ , init , (_ ⟨ st ∣ s ⟩←— tr))
       where
       bch≡ : (b , ch) ≡ (B , ch↓)
       bch≡ = cong (_ ,_) $ connects-to≡ b↝ B↝
-... | LocalStep s→@(VoteBlock {H = H} {txs = txs} {ch = ch↓} _ _ _ _ _ (_ ∷ _ ⊣ B↝))
+... | LocalStep s→@(VoteBlock {ch = ch↓} {txs = txs} _ _ _ _ _ (_ ∷ _ ⊣ B↝))
   = QED
   where
-  open ∣VoteBlock∣ p s H txs
+  open ∣VoteBlock∣ p s ch↓ txs
 
   QED : Any ≡[ p ▷ b , ch ] ((_ ⊢ s→) ∷ allLocalSteps tr)
   QED
@@ -217,11 +217,11 @@ notarized∈ {s′} (_ , init , (_ ⟨ st ∣ s ⟩←— tr))
     with p ≟ p′
   ... | no p≢ rewrite lookup✖ p≢ = nch∈
   ... | yes refl rewrite lookup✓ = notarized-chain-∈-∷ nch∈
-  QED | ⟫ VoteBlock {H = H} {txs = txs} {ch = ch↓} M∈ _ _ _ _ _ | ⟫ there st∈
+  QED | ⟫ VoteBlock {ch = ch↓} {txs = txs} M∈ _ _ _ _ _ | ⟫ there st∈
     with p ≟ p′
   ... | no p≢ rewrite lookup✖ p≢ = IH st∈
   ... | yes refl rewrite lookup✓ = notarized-chain-∈-∷ $ notarized-chain-∈-∷ $ IH st∈
-  QED | ⟫ VoteBlock {H = H} {txs = txs} {ch = ch↓} M∈ _ _ _ (nch∈ , _) _
+  QED | ⟫ VoteBlock {ch = ch↓} {txs = txs} M∈ _ _ _ (nch∈ , _) _
       | ⟫ here (refl , refl , just refl)
     with p ≟ p′
   ... | no p≢ rewrite lookup✖ p≢ = nch∈
@@ -281,23 +281,23 @@ increasingEpochs⋯ {s′} (_ , init , (_ ⟨ st ∣ s ⟩←— tr))
 
     p∈ : L ∈ voteIds (s .history) b
     p∈ = IH-hasVot st∈
-  QED | ⟫ VoteBlock {H = H} _ _ _ _ _ _ | ⟫ there st∈ | ⟫ there st∈′ = IH st∈ st∈′
+  QED | ⟫ VoteBlock _ _ _ _ _ _ | ⟫ there st∈ | ⟫ there st∈′ = IH st∈ st∈′
   QED | ⟫ VoteBlock _ _ _ _ _ _ | ⟫ HERE | ⟫ HERE
     = ⊥-elim $ Nat.<-irrefl refl len<
-  QED | ⟫ VoteBlock {H = H} {txs = txs} {ch = ch↓} _ _ _ _ (_ , mkLongest∈ lch) _ | ⟫ HERE | ⟫ there st∈′
+  QED | ⟫ VoteBlock {ch = ch↓} {txs = txs} _ _ _ _ (_ , mkLongest∈ lch) _ | ⟫ HERE | ⟫ there st∈′
     = ⊥-elim $ Nat.<⇒≱ len< len≥
     where
-    open ∣VoteBlock∣ p s H txs
+    open ∣VoteBlock∣ p s ch↓ txs
 
     ch∈′ : ch′ notarized-chain-∈ ((s ＠ p) .db)
     ch∈′ = IH-not∈ st∈′
 
     len≥ : length ch↓ ≥ length ch′
     len≥ = lch ch∈′
-  QED | ⟫ VoteBlock {H = H} {txs = txs} _ _ _ _ _ _ | ⟫ there st∈ | ⟫ HERE
+  QED | ⟫ VoteBlock {ch = ch} {txs = txs} _ _ _ _ _ _ | ⟫ there st∈ | ⟫ HERE
     = IH-noFutVot p∈
     where
-    open ∣VoteBlock∣ p s H txs
+    open ∣VoteBlock∣ p s ch txs
 
     p∈ : p ∈ voteIds (s .history) b
     p∈ = IH-hasVot st∈

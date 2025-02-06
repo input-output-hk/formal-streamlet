@@ -56,7 +56,7 @@ historySound = Step⇒Invariant (λ where refl ()) historySound→
       with p ≟ p′
     ... | yes refl rewrite lookup✓ = there ih
     ... | no  p≢   rewrite lookup✖ p≢ = ih
-    QED | ⟫ VoteBlock {H = H} {txs = txs} M∈ _ _ _ _ _
+    QED | ⟫ VoteBlock {txs = txs} M∈ _ _ _ _ _
       with ⟫ m∈
     ... | ⟫ here refl rewrite p≡ | lookup✓ = here refl
     ... | ⟫ there m∈
@@ -167,7 +167,7 @@ inboxCompleteHonest {s′} (_ , refl , (_ ⟨ s→ ∣ s ⟩←— tr))
     with p ≟ p′
   ... | yes refl rewrite lookup✓    = there $ IH m∈
   ... | no  p≢   rewrite lookup✖ p≢ = there $ IH m∈
-  QED | ⟫ VoteBlock {H = H} {txs = txs} M∈ _ _ _ _ _
+  QED | ⟫ VoteBlock {txs = txs} M∈ _ _ _ _ _
     with p ≟ p′
   ... | yes refl rewrite lookup✓    = there $′ IH (∈-removeAt⁻ _ m∈)
   ... | no  p≢   rewrite lookup✖ p≢ = there $′ IH m∈
@@ -221,7 +221,7 @@ historyComplete {s′} (_ , refl , (_ ⟨ s→ ∣ s ⟩←— tr))
     with ⟫ m∈
   ... | ⟫ here refl = here refl
   ... | ⟫ there m∈ = there $ IH m∈
-  QED | ⟫ VoteBlock {H = H} {txs = txs} M∈ _ _ _ _ _
+  QED | ⟫ VoteBlock {txs = txs} M∈ _ _ _ _ _
     with p ≟ p′
   ... | no  p≢   rewrite lookup✖ p≢ = there $ IH m∈
   ... | yes refl rewrite lookup✓

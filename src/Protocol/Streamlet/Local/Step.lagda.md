@@ -48,8 +48,6 @@ finalize ch ls = record ls
 ## The local step relation
 
 Given a local state a step may produce a message.
-(The local step relation could be made deterministic, by stating
-that a node should propose or vote before it starts to process votes.)
 
 ```agda
 data _▷_⊢_—[_]→_
@@ -74,7 +72,7 @@ data _▷_⊢_—[_]→_
   VoteBlock :
     let
       L  = epochLeader e
-      b  = ⟨ H , e , txs ⟩
+      b  = ⟨ ch ♯ , e , txs ⟩
       sᴾ = signBlock L b
       mᵖ = Propose sᴾ
       m  = Vote    $ signBlock p b
