@@ -1,3 +1,6 @@
+dist/
+dist-typed/
+
 # Agda
 *.agdai
 src/html/*.md

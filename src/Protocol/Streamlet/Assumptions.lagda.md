@@ -54,7 +54,7 @@ record Assumptions : Type₁ where
 
   field Honest : Pid → Type
         instance Dec-Honest : Honest ⁇¹
-        -- Honest-irr : Irrelevant¹ Honest
+        Honest-irr : Irrelevant¹ Honest
 
   Dishonest = ¬_ ∘ Honest
 

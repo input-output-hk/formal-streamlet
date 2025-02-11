@@ -10,7 +10,7 @@ pattern 𝔸 = fsuc fzero
 pattern 𝔹 = fsuc (fsuc fzero)
 
 ⋯ : Assumptions
-⋯ = record {go; honest-majority = auto} where module go where
+⋯ = record {go; honest-majority = auto; Honest-irr = λ _ _ → refl} where module go where
 
   hashes = DummyHashing
   open HashAssumptions hashes
