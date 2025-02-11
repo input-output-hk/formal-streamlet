@@ -35,3 +35,5 @@ pattern 𝔹 = fsuc (fsuc fzero)
     𝔹 → mk-keyPair (fromℕ 2) (fromℕ 2)
 
 open Assumptions ⋯ public
+open import Protocol.Streamlet ⋯ public
+open import Protocol.Streamlet.Decidability ⋯ public

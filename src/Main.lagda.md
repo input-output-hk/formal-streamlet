@@ -1,8 +1,26 @@
 # Index
 ```agda
 -- {-# OPTIONS --safe #-}
-open import Prelude
 
+-- ** prerequisites
+open import Prelude
 open import Hash
-open import Protocol
+
+-- ** the Streamlet protocol
+open import Protocol.Streamlet
+
+-- ** decision procedures
+open import Protocol.Streamlet.Decidability
+
+-- ** mechanized proof of consistency
+open import Protocol.Streamlet.Properties
+
+-- ** example trace
+open import DummyHashing {- unsafe -}
+open import Protocol.Streamlet.Test.Core
+open import Protocol.Streamlet.Test.ExampleTrace
+
+-- ** trace verifier
+open import Protocol.Streamlet.TraceVerifier
+open import Protocol.Streamlet.Test.TraceVerifier
 ```
