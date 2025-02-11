@@ -4,10 +4,7 @@ open import Prelude
 open import Hash
 
 open import Protocol.Streamlet.Test.Core
-open import Protocol.Streamlet.Block ⋯
-open import Protocol.Streamlet.Message ⋯
-open import Protocol.Streamlet.Local.Chain ⋯
-open import Protocol.Streamlet.Local.State ⋯
+  hiding (NotarizedBlock-dec)
 
 instance
   NotarizedBlock-dec : NotarizedBlock ⁇²

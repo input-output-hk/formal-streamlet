@@ -23,4 +23,12 @@ open import Protocol.Streamlet.Test.ExampleTrace
 -- ** trace verifier
 open import Protocol.Streamlet.TraceVerifier
 open import Protocol.Streamlet.Test.TraceVerifier
+
+-- ** other tests
+open import Protocol.Streamlet.Test.Block
+open import Protocol.Streamlet.Test.Chain
+open import Protocol.Streamlet.Test.LocalState
+open import Protocol.Streamlet.Test.LocalState2
+open import Protocol.Streamlet.StepVerifier
+open import Protocol.Streamlet.Test.StepVerifier
 ```

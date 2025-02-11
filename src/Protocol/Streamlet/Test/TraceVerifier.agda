@@ -50,7 +50,7 @@ trace = L.reverse $
 
 test : Bool
 test = ¿ ValidTrace trace ¿ᵇ
--- {-# COMPILE AGDA2LAMBOX test #-}
+{-# COMPILE AGDA2LAMBOX test #-}
 
 _ : test ≡ true
 _ = refl

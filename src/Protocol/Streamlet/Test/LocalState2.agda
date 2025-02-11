@@ -4,8 +4,6 @@ open import Prelude
 open import Hash
 
 open import Protocol.Streamlet.Test.Core
-open import Protocol.Streamlet ⋯
-open import Protocol.Streamlet.Decidability ⋯
 
 B : Block
 B = ⟨ genesisChain ♯ , 42 , [] ⟩
