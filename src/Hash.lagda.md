@@ -26,8 +26,8 @@ Hashable types are collected under a appropriate typeclass:
 ```agda
 record Hashable (A : Type) : Type where
   field
-    _♯    : A → Hash
-    ♯-inj : Injective≡ _♯
+    _♯ : A → Hash
+    @0 ♯-inj : Injective≡ _♯
 
   infix 100 _♯
 ```
@@ -42,24 +42,19 @@ We assume an abstract type of *nonces* and
 hashing functions for primitive types and type formers:
 ```agda
 record HashAssumptions : Type₁ where
-  field
-    Nonce : Type
-    instance
-      -- type formers
-      Hashable-×     : ⦃ Hashable A ⦄ → ⦃ Hashable B ⦄ → Hashable (A × B)
-      Hashable-⊎     : ⦃ Hashable A ⦄ → ⦃ Hashable B ⦄ → Hashable (A ⊎ B)
-      Hashable-List  : ⦃ Hashable A ⦄ → Hashable (List A)
-      Hashable-Maybe : ⦃ Hashable A ⦄ → Hashable (Maybe A)
+  field instance
+    -- type formers
+    Hashable-×     : ⦃ Hashable A ⦄ → ⦃ Hashable B ⦄ → Hashable (A × B)
+    Hashable-⊎     : ⦃ Hashable A ⦄ → ⦃ Hashable B ⦄ → Hashable (A ⊎ B)
+    Hashable-List  : ⦃ Hashable A ⦄ → Hashable (List A)
+    Hashable-Maybe : ⦃ Hashable A ⦄ → Hashable (Maybe A)
 
-      -- base types
-      Hashable-⊤         : Hashable ⊤
-      Hashable-String    : Hashable String
-      Hashable-Bitstring : Hashable Bitstring
-      Hashable-Nonce     : Hashable Nonce
-      Hashable-ℕ         : Hashable ℕ
-      Hashable-Int       : Hashable ℤ
-      Hashable-Float     : Hashable Float
-      Hashable-Fin       : ∀{n} → Hashable (Fin n)
+    -- base types
+    Hashable-⊤         : Hashable ⊤
+    Hashable-Bitstring : Hashable Bitstring
+    Hashable-ℕ         : Hashable ℕ
+    Hashable-Int       : Hashable ℤ
+    Hashable-Fin       : ∀{n} → Hashable (Fin n)
 ```
 <!--
 ```agda
