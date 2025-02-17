@@ -19,4 +19,5 @@ open import Protocol.Streamlet.Local.State ⋯ public
 open import Protocol.Streamlet.Local.Step ⋯ public
 open import Protocol.Streamlet.Global.State ⋯ public
 open import Protocol.Streamlet.Global.Step ⋯ public
+open import Protocol.Streamlet.Global.Traces ⋯ public
 ```
