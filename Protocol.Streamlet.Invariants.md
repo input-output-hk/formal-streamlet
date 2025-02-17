@@ -1,0 +1,16 @@
+# Proven properties of state invariants
+<!--
+<pre class="Agda"><a id="54" class="Symbol">{-#</a> <a id="58" class="Keyword">OPTIONS</a> <a id="66" class="Pragma">--safe</a> <a id="73" class="Symbol">#-}</a>
+<a id="77" class="Keyword">open</a> <a id="82" class="Keyword">import</a> <a id="89" href="Protocol.Streamlet.Assumptions.html" class="Module">Protocol.Streamlet.Assumptions</a>
+
+<a id="121" class="Keyword">module</a> <a id="128" href="Protocol.Streamlet.Invariants.html" class="Module">Protocol.Streamlet.Invariants</a> <a id="158" class="Symbol">(</a><a id="159" href="Protocol.Streamlet.Invariants.html#159" class="Bound">⋯</a> <a id="161" class="Symbol">:</a> <a id="163" class="Symbol">_)</a> <a id="166" class="Keyword">where</a>
+</pre>-->
+
+<pre class="Agda"><a id="189" class="Keyword">open</a> <a id="194" class="Keyword">import</a> <a id="201" href="Protocol.Streamlet.Invariants.History.html" class="Module">Protocol.Streamlet.Invariants.History</a> <a id="239" href="Protocol.Streamlet.Invariants.html#159" class="Bound">⋯</a> <a id="241" class="Keyword">public</a>
+<a id="248" class="Keyword">open</a> <a id="253" class="Keyword">import</a> <a id="260" href="Protocol.Streamlet.Invariants.Votes.html" class="Module">Protocol.Streamlet.Invariants.Votes</a> <a id="296" href="Protocol.Streamlet.Invariants.html#159" class="Bound">⋯</a> <a id="298" class="Keyword">public</a>
+<a id="305" class="Keyword">open</a> <a id="310" class="Keyword">import</a> <a id="317" href="Protocol.Streamlet.Invariants.Uniqueness.html" class="Module">Protocol.Streamlet.Invariants.Uniqueness</a> <a id="358" href="Protocol.Streamlet.Invariants.html#159" class="Bound">⋯</a> <a id="360" class="Keyword">public</a>
+<a id="367" class="Keyword">open</a> <a id="372" class="Keyword">import</a> <a id="379" href="Protocol.Streamlet.Invariants.Unforgeability.html" class="Module">Protocol.Streamlet.Invariants.Unforgeability</a> <a id="424" href="Protocol.Streamlet.Invariants.html#159" class="Bound">⋯</a> <a id="426" class="Keyword">public</a>
+<a id="433" class="Keyword">open</a> <a id="438" class="Keyword">import</a> <a id="445" href="Protocol.Streamlet.Invariants.VotedOnlyOnce.html" class="Module">Protocol.Streamlet.Invariants.VotedOnlyOnce</a> <a id="489" href="Protocol.Streamlet.Invariants.html#159" class="Bound">⋯</a> <a id="491" class="Keyword">public</a>
+<a id="498" class="Keyword">open</a> <a id="503" class="Keyword">import</a> <a id="510" href="Protocol.Streamlet.Invariants.TraceInvariants.html" class="Module">Protocol.Streamlet.Invariants.TraceInvariants</a> <a id="556" href="Protocol.Streamlet.Invariants.html#159" class="Bound">⋯</a> <a id="558" class="Keyword">public</a>
+<a id="565" class="Keyword">open</a> <a id="570" class="Keyword">import</a> <a id="577" href="Protocol.Streamlet.Invariants.IncreasingEpochs.html" class="Module">Protocol.Streamlet.Invariants.IncreasingEpochs</a> <a id="624" href="Protocol.Streamlet.Invariants.html#159" class="Bound">⋯</a> <a id="626" class="Keyword">public</a>
+</pre>
