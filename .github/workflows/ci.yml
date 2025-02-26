@@ -1,11 +1,15 @@
-name: Agda CI
+name: CI
 on:
   # schedule: [{cron: '0 0 * * *'}]
   push:
     branches: main
-    paths: 'src/**'
+    paths:
+      - 'src/**'
+      - '.github/workflows/ci.yml'
   pull_request:
-    paths: 'src/**'
+    paths:
+      - 'src/**'
+      - '.github/workflows/ci.yml'
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
