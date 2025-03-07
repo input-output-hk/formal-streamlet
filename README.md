@@ -2,7 +2,7 @@
 
 Based on:
 
-    Gelashvili et al., 2022, May. "Jolteon and Ditto: Network-adaptive efficient consensus with asynchronous fallback"
+    Chan & Shi, 2020, "Streamlet: Textbook streamlined blockchains"
 
 
 ## HTML
