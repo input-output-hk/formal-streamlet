@@ -6,4 +6,4 @@ Based on:
 
 
 ## HTML
-Browse the Agda formalization in HTML [here](https://input-output-hk.github.io/formal-streamlet/Main.html).
+Browse the Agda formalization in HTML [here](https://input-output-hk.github.io/formal-streamlet).
