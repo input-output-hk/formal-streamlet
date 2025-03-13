@@ -266,3 +266,7 @@ MAll-× : ∀ {P Q : A → Type} (mx : Maybe A)
   → M.All.All (P ∩¹ Q) mx
 MAll-× .nothing  nothing  nothing = nothing
 MAll-× .(just _) (just p) (just q) = just (p , q)
+
+-- equality
+subst˘ : ∀ {A : Type ℓ} {x y : A} (P : A → Type ℓ′) → x ≡ y → P y → P x
+subst˘ P eq p = subst P (sym eq) p

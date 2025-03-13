@@ -16,7 +16,7 @@ data Action : Type where
   RegisterVote  : Pid → ℕ → Action
   FinalizeBlock : Pid → Chain → Block → Action
   DishonestStep : Pid → Message → Action
-  Deliver Drop : ℕ → Action
+  Deliver Drop  : ℕ → Action
   AdvanceEpoch  : Action
 
 Actions = List Action
@@ -315,36 +315,41 @@ getLabels = λ where
 ValidAction-sound :
   (va : ValidAction α s) →
   s —→ ⟦ va ⟧
-ValidAction-sound (Vote m∈ x x₁ x₂ x₃ x₄) = LocalStep (VoteBlock m∈ (toRelevant x) (toRelevant x₁) (toRelevant x₂) (toRelevant x₃) (toRelevant x₄))
-ValidAction-sound (Propose x x₁ x₂ x₃) = LocalStep (ProposeBlock (toRelevant x) (toRelevant x₁) (toRelevant x₂) (toRelevant x₃))
-ValidAction-sound (RegisterVote m∈ _ x) = LocalStep (RegisterVote m∈ (toRelevant x))
-ValidAction-sound (FinalizeBlock x x₁) = LocalStep (FinalizeBlock _ _ (toRelevant x) (toRelevant x₁))
-ValidAction-sound (DishonestStep x x₁) = DishonestLocalStep (toRelevant x) (toRelevant x₁)
-ValidAction-sound (Deliver env∈ _) = Deliver env∈
-ValidAction-sound (Drop env∈ _) = Drop env∈
-ValidAction-sound AdvanceEpoch = AdvanceEpoch
+ValidAction-sound = λ where
+  (Vote m∈ x x₁ x₂ x₃ x₄) → LocalStep $
+    VoteBlock m∈ (toRelevant x) (toRelevant x₁) (toRelevant x₂) (toRelevant x₃) (toRelevant x₄)
+  (Propose x x₁ x₂ x₃) → LocalStep $
+    ProposeBlock (toRelevant x) (toRelevant x₁) (toRelevant x₂) (toRelevant x₃)
+  (RegisterVote m∈ _ x) → LocalStep $ RegisterVote m∈ (toRelevant x)
+  (FinalizeBlock x x₁) → LocalStep $ FinalizeBlock _ _ (toRelevant x) (toRelevant x₁)
+  (DishonestStep x x₁) → DishonestLocalStep (toRelevant x) (toRelevant x₁)
+  (Deliver env∈ _) → Deliver env∈
+  (Drop env∈ _) → Drop env∈
+  AdvanceEpoch → AdvanceEpoch
 
 ValidAction-complete :
   (st : s —→ s′) →
   ValidAction (getLabel st) s
-ValidAction-complete (LocalStep (ProposeBlock x x₁ x₂ x₃)) = Propose x x₁ x₂ x₃
-ValidAction-complete (LocalStep (VoteBlock m∈ x x₁ x₂ x₃ x₄)) = Vote m∈ x x₁ x₂ x₃ x₄
-ValidAction-complete (LocalStep (RegisterVote m∈ x)) = RegisterVote m∈ refl x
-ValidAction-complete (LocalStep (FinalizeBlock ch b x x₁)) = FinalizeBlock x x₁
-ValidAction-complete (DishonestLocalStep x x₁) = DishonestStep x x₁
-ValidAction-complete (Deliver env∈) = Deliver env∈ refl
-ValidAction-complete (Drop env∈) = Drop env∈ refl
-ValidAction-complete AdvanceEpoch = AdvanceEpoch
+ValidAction-complete = λ where
+  (LocalStep (ProposeBlock x x₁ x₂ x₃)) → Propose x x₁ x₂ x₃
+  (LocalStep (VoteBlock m∈ x x₁ x₂ x₃ x₄)) → Vote m∈ x x₁ x₂ x₃ x₄
+  (LocalStep (RegisterVote m∈ x)) → RegisterVote m∈ refl x
+  (LocalStep (FinalizeBlock _ _ x x₁)) → FinalizeBlock x x₁
+  (DishonestLocalStep x x₁) → DishonestStep x x₁
+  (Deliver env∈) → Deliver env∈ refl
+  (Drop env∈) → Drop env∈ refl
+  AdvanceEpoch → AdvanceEpoch
 
 ValidAction-⟦⟧ : (st : s —→ s′) → ⟦ ValidAction-complete st ⟧ ≡ s′
-ValidAction-⟦⟧ (LocalStep (ProposeBlock x x₁ x₂ x₃)) = refl
-ValidAction-⟦⟧ (LocalStep (VoteBlock m∈ x x₁ x₂ x₃ x₄)) = refl
-ValidAction-⟦⟧ (LocalStep (RegisterVote m∈ x)) = refl
-ValidAction-⟦⟧ (LocalStep (FinalizeBlock ch b x x₁)) = refl
-ValidAction-⟦⟧ (DishonestLocalStep x x₁) = refl
-ValidAction-⟦⟧ (Deliver env∈) = refl
-ValidAction-⟦⟧ AdvanceEpoch = refl
-ValidAction-⟦⟧ (Drop env∈) = refl
+ValidAction-⟦⟧ = λ where
+  (LocalStep (ProposeBlock _ _ _ _)) → refl
+  (LocalStep (VoteBlock _ _ _ _ _ _)) → refl
+  (LocalStep (RegisterVote _ _)) → refl
+  (LocalStep (FinalizeBlock _ _ _ _)) → refl
+  (DishonestLocalStep _ _) → refl
+  (Deliver _) → refl
+  AdvanceEpoch → refl
+  (Drop _) → refl
 
 ValidTrace-sound :
   (tr : ValidTrace αs) →
@@ -377,13 +382,3 @@ mutual
       ≡⟨ ValidAction-⟦⟧ st ⟩
         s
       ≡-Reasoning.∎)
-
-{-
-ValidAction′ : Action → GlobalState → Type
-ValidAction′ α s =
-  ∃ λ s′ → ∃ λ (st : s —→ s′) →
-    getLabel st ≡ α
-
-instance
-  Dec-ValidAction′ : ValidAction′ ⁇²
--}

@@ -24,6 +24,10 @@ open import Protocol.Streamlet.Test.ExampleTrace
 open import Protocol.Streamlet.TraceVerifier
 open import Protocol.Streamlet.Test.TraceVerifier
 
+-- ** variants on trace verification
+open import Protocol.Streamlet.TraceVerifier.Intrinsic
+open import Protocol.Streamlet.TraceVerifier.Reverse
+
 -- ** other tests
 open import Protocol.Streamlet.Test.Block
 open import Protocol.Streamlet.Test.Chain
