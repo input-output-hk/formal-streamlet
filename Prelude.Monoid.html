@@ -1,0 +1,19 @@
+<!DOCTYPE HTML>
+<html><head><meta charset="utf-8"><title>Prelude.Monoid</title><link rel="stylesheet" href="Agda.css"></head><body><pre class="Agda"><a id="1" class="Symbol">{-#</a> <a id="5" class="Keyword">OPTIONS</a> <a id="13" class="Pragma">--safe</a> <a id="20" class="Symbol">#-}</a>
+<a id="24" class="Keyword">module</a> <a id="31" href="Prelude.Monoid.html" class="Module">Prelude.Monoid</a> <a id="46" class="Keyword">where</a>
+
+<a id="53" class="Keyword">open</a> <a id="58" class="Keyword">import</a> <a id="65" href="Prelude.Init.html" class="Module">Prelude.Init</a>
+
+<a id="79" class="Keyword">record</a> <a id="Monoid"></a><a id="86" href="Prelude.Monoid.html#86" class="Record">Monoid</a> <a id="93" class="Symbol">(</a><a id="94" href="Prelude.Monoid.html#94" class="Bound">A</a> <a id="96" class="Symbol">:</a> <a id="98" href="Agda.Primitive.html#388" class="Primitive">Type</a><a id="102" class="Symbol">)</a> <a id="104" class="Symbol">:</a> <a id="106" href="Agda.Primitive.html#388" class="Primitive">Type</a> <a id="111" class="Keyword">where</a>
+  <a id="119" class="Keyword">field</a> <a id="Monoid.ε"></a><a id="125" href="Prelude.Monoid.html#125" class="Field">ε</a> <a id="127" class="Symbol">:</a> <a id="129" href="Prelude.Monoid.html#94" class="Bound">A</a>
+<a id="131" class="Keyword">open</a> <a id="136" href="Prelude.Monoid.html#86" class="Module">Monoid</a> <a id="143" class="Symbol">⦃...⦄</a> <a id="149" class="Keyword">public</a>
+
+<a id="157" class="Keyword">private</a> <a id="165" class="Keyword">variable</a> <a id="174" href="Prelude.Monoid.html#174" class="Generalizable">A</a> <a id="176" class="Symbol">:</a> <a id="178" href="Agda.Primitive.html#388" class="Primitive">Type</a>
+
+<a id="184" class="Keyword">instance</a>
+  <a id="Monoid-List"></a><a id="195" href="Prelude.Monoid.html#195" class="Function">Monoid-List</a> <a id="207" class="Symbol">:</a> <a id="209" href="Prelude.Monoid.html#86" class="Record">Monoid</a> <a id="216" class="Symbol">(</a><a id="217" href="Agda.Builtin.List.html#147" class="Datatype">List</a> <a id="222" href="Prelude.Monoid.html#174" class="Generalizable">A</a><a id="223" class="Symbol">)</a>
+  <a id="227" href="Prelude.Monoid.html#195" class="Function">Monoid-List</a> <a id="239" class="Symbol">.</a><a id="240" href="Prelude.Monoid.html#125" class="Field">ε</a> <a id="242" class="Symbol">=</a> <a id="244" href="Agda.Builtin.List.html#184" class="InductiveConstructor">[]</a>
+
+  <a id="Monoid-Bin"></a><a id="250" href="Prelude.Monoid.html#250" class="Function">Monoid-Bin</a> <a id="261" class="Symbol">:</a> <a id="263" href="Prelude.Monoid.html#86" class="Record">Monoid</a> <a id="270" href="Data.Nat.Binary.Base.html#1006" class="Datatype">Bitstring</a>
+  <a id="282" href="Prelude.Monoid.html#250" class="Function">Monoid-Bin</a> <a id="293" class="Symbol">.</a><a id="294" href="Prelude.Monoid.html#125" class="Field">ε</a> <a id="296" class="Symbol">=</a> <a id="298" href="Data.Nat.Binary.Base.html#1023" class="InductiveConstructor">Bin.zero</a>
+</pre></body></html>

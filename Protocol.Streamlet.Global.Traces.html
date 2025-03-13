@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Protocol.Streamlet.Global.Traces</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="Agda.css" />
+</head>
+<body>
+<h2 id="traces">Traces</h2>
+<!--
+<pre class="Agda"><a id="27" class="Symbol">{-#</a> <a id="31" class="Keyword">OPTIONS</a> <a id="39" class="Pragma">--safe</a> <a id="46" class="Symbol">#-}</a>
+<a id="50" class="Keyword">open</a> <a id="55" class="Keyword">import</a> <a id="62" href="Prelude.html" class="Module">Prelude</a>
+<a id="70" class="Keyword">open</a> <a id="75" class="Keyword">import</a> <a id="82" href="Hash.html" class="Module">Hash</a>
+
+<a id="88" class="Keyword">open</a> <a id="93" class="Keyword">import</a> <a id="100" href="Protocol.Streamlet.Base.html" class="Module">Protocol.Streamlet.Base</a>
+<a id="124" class="Keyword">open</a> <a id="129" class="Keyword">import</a> <a id="136" href="Protocol.Streamlet.Assumptions.html" class="Module">Protocol.Streamlet.Assumptions</a>
+
+<a id="168" class="Keyword">module</a> <a id="175" href="Protocol.Streamlet.Global.Traces.html" class="Module">Protocol.Streamlet.Global.Traces</a> <a id="208" class="Symbol">(</a><a id="209" href="Protocol.Streamlet.Global.Traces.html#209" class="Bound">⋯</a> <a id="211" class="Symbol">:</a> <a id="213" class="Symbol">_)</a> <a id="216" class="Symbol">(</a><a id="217" class="Keyword">open</a> <a id="222" href="Protocol.Streamlet.Assumptions.html#222" class="Module">Assumptions</a> <a id="234" href="Protocol.Streamlet.Global.Traces.html#209" class="Bound">⋯</a><a id="235" class="Symbol">)</a> <a id="237" class="Keyword">where</a>
+
+<a id="244" class="Keyword">open</a> <a id="249" class="Keyword">import</a> <a id="256" href="Protocol.Streamlet.Block.html" class="Module">Protocol.Streamlet.Block</a> <a id="281" href="Protocol.Streamlet.Global.Traces.html#209" class="Bound">⋯</a>
+<a id="283" class="Keyword">open</a> <a id="288" class="Keyword">import</a> <a id="295" href="Protocol.Streamlet.Message.html" class="Module">Protocol.Streamlet.Message</a> <a id="322" href="Protocol.Streamlet.Global.Traces.html#209" class="Bound">⋯</a>
+<a id="324" class="Keyword">open</a> <a id="329" class="Keyword">import</a> <a id="336" href="Protocol.Streamlet.Local.Chain.html" class="Module">Protocol.Streamlet.Local.Chain</a> <a id="367" href="Protocol.Streamlet.Global.Traces.html#209" class="Bound">⋯</a>
+<a id="369" class="Keyword">open</a> <a id="374" class="Keyword">import</a> <a id="381" href="Protocol.Streamlet.Local.State.html" class="Module">Protocol.Streamlet.Local.State</a> <a id="412" href="Protocol.Streamlet.Global.Traces.html#209" class="Bound">⋯</a>
+<a id="414" class="Keyword">open</a> <a id="419" class="Keyword">import</a> <a id="426" href="Protocol.Streamlet.Local.Step.html" class="Module">Protocol.Streamlet.Local.Step</a> <a id="456" href="Protocol.Streamlet.Global.Traces.html#209" class="Bound">⋯</a>
+<a id="458" class="Keyword">open</a> <a id="463" class="Keyword">import</a> <a id="470" href="Protocol.Streamlet.Global.State.html" class="Module">Protocol.Streamlet.Global.State</a> <a id="502" href="Protocol.Streamlet.Global.Traces.html#209" class="Bound">⋯</a>
+<a id="504" class="Keyword">open</a> <a id="509" class="Keyword">import</a> <a id="516" href="Protocol.Streamlet.Global.Step.html" class="Module">Protocol.Streamlet.Global.Step</a> <a id="547" href="Protocol.Streamlet.Global.Traces.html#209" class="Bound">⋯</a>
+</pre>-->
+<p>We consider <strong>traces</strong> of the (global) step relation,
+defined as its <em>reflexive-transitive closure</em>, and use these to
+prove invariants as state predicates:</p>
+<pre class="Agda"><a id="725" class="Keyword">open</a> <a id="730" class="Keyword">import</a> <a id="737" href="Prelude.Closures.html" class="Module">Prelude.Closures</a> <a id="754" href="Protocol.Streamlet.Global.Step.html#1550" class="Datatype Operator">_—→_</a> <a id="759" class="Keyword">public</a>
+  <a id="768" class="Keyword">using</a> <a id="774" class="Symbol">(</a> <a id="776" href="Prelude.Closures.html#279" class="InductiveConstructor Operator">begin_</a><a id="782" class="Symbol">;</a> <a id="784" href="Prelude.Closures.html#335" class="InductiveConstructor Operator">_∎</a>
+        <a id="795" class="Symbol">;</a> <a id="797" href="Prelude.Closures.html#666" class="Datatype Operator">_↞—_</a><a id="801" class="Symbol">;</a> <a id="803" href="Prelude.Closures.html#709" class="InductiveConstructor Operator">_⟨_⟩←—_</a><a id="810" class="Symbol">;</a> <a id="812" href="Prelude.Closures.html#830" class="InductiveConstructor Operator">_⟨_∣_⟩←—_</a>
+        <a id="830" class="Symbol">;</a> <a id="832" href="Prelude.Closures.html#312" class="Datatype Operator">_—↠_</a><a id="836" class="Symbol">;</a> <a id="838" href="Prelude.Closures.html#355" class="InductiveConstructor Operator">_—→⟨_⟩_</a>
+        <a id="854" class="Symbol">;</a> <a id="856" href="Prelude.Closures.html#3400" class="Function">Reachable</a><a id="865" class="Symbol">;</a> <a id="867" href="Prelude.Closures.html#3717" class="Function">Invariant</a><a id="876" class="Symbol">;</a> <a id="878" href="Prelude.Closures.html#3184" class="Function">StepPreserved</a><a id="891" class="Symbol">;</a> <a id="893" href="Prelude.Closures.html#3892" class="Function">Step⇒Invariant</a>
+        <a id="916" class="Symbol">;</a> <a id="918" href="Prelude.Closures.html#4109" class="Function">Trace</a><a id="923" class="Symbol">;</a> <a id="925" href="Prelude.Closures.html#4132" class="Function">TraceProperty</a><a id="938" class="Symbol">;</a> <a id="940" href="Prelude.Closures.html#4165" class="Function">TraceInvariant</a>
+        <a id="963" class="Symbol">)</a>
+
+<a id="StateProperty"></a><a id="966" href="Protocol.Streamlet.Global.Traces.html#966" class="Function">StateProperty</a> <a id="980" class="Symbol">=</a> <a id="982" href="Protocol.Streamlet.Global.State.html#663" class="Record">GlobalState</a> <a id="994" class="Symbol">→</a> <a id="996" href="Agda.Primitive.html#388" class="Primitive">Type</a>
+</pre>
+<p>Now, we can consider a specific local step occurring within a
+sequence of global transitions:</p>
+<pre class="Agda"><a id="1109" class="Keyword">record</a> <a id="Step"></a><a id="1116" href="Protocol.Streamlet.Global.Traces.html#1116" class="Record">Step</a> <a id="1121" class="Symbol">:</a> <a id="1123" href="Agda.Primitive.html#388" class="Primitive">Type</a> <a id="1128" class="Keyword">where</a>
+  <a id="1136" class="Keyword">constructor</a> <a id="_⊢_"></a><a id="1148" href="Protocol.Streamlet.Global.Traces.html#1148" class="InductiveConstructor Operator">_⊢_</a>
+  <a id="1154" class="Keyword">field</a>
+    <a id="Step.stepArgs"></a><a id="1164" href="Protocol.Streamlet.Global.Traces.html#1164" class="Field">stepArgs</a> <a id="1173" class="Symbol">:</a> <a id="1175" class="Symbol">_</a> <a id="1177" href="Data.Product.Base.html#1618" class="Function Operator">×</a> <a id="1179" class="Symbol">_</a> <a id="1181" href="Data.Product.Base.html#1618" class="Function Operator">×</a> <a id="1183" class="Symbol">_</a> <a id="1185" href="Data.Product.Base.html#1618" class="Function Operator">×</a> <a id="1187" class="Symbol">_</a> <a id="1189" href="Data.Product.Base.html#1618" class="Function Operator">×</a> <a id="1191" class="Symbol">_</a>
+    <a id="Step.step"></a><a id="1197" href="Protocol.Streamlet.Global.Traces.html#1197" class="Field">step</a> <a id="1202" class="Symbol">:</a> <a id="1204" class="Keyword">let</a> <a id="1208" href="Protocol.Streamlet.Global.Traces.html#1208" class="Bound">p</a> <a id="1210" href="Agda.Builtin.Sigma.html#235" class="InductiveConstructor Operator">,</a> <a id="1212" href="Protocol.Streamlet.Global.Traces.html#1212" class="Bound">e</a> <a id="1214" href="Agda.Builtin.Sigma.html#235" class="InductiveConstructor Operator">,</a> <a id="1216" href="Protocol.Streamlet.Global.Traces.html#1216" class="Bound">ls</a> <a id="1219" href="Agda.Builtin.Sigma.html#235" class="InductiveConstructor Operator">,</a> <a id="1221" href="Protocol.Streamlet.Global.Traces.html#1221" class="Bound">mm</a> <a id="1224" href="Agda.Builtin.Sigma.html#235" class="InductiveConstructor Operator">,</a> <a id="1226" href="Protocol.Streamlet.Global.Traces.html#1226" class="Bound">ls&#39;</a> <a id="1230" class="Symbol">=</a> <a id="1232" href="Protocol.Streamlet.Global.Traces.html#1164" class="Field">stepArgs</a> <a id="1241" class="Keyword">in</a>
+           <a id="1255" href="Protocol.Streamlet.Global.Traces.html#1208" class="Bound">p</a> <a id="1257" href="Protocol.Streamlet.Local.Step.html#1181" class="Datatype Operator">▷</a> <a id="1259" href="Protocol.Streamlet.Global.Traces.html#1212" class="Bound">e</a> <a id="1261" href="Protocol.Streamlet.Local.Step.html#1181" class="Datatype Operator">⊢</a> <a id="1263" href="Protocol.Streamlet.Global.Traces.html#1216" class="Bound">ls</a> <a id="1266" href="Protocol.Streamlet.Local.Step.html#1181" class="Datatype Operator">—[</a> <a id="1269" href="Protocol.Streamlet.Global.Traces.html#1221" class="Bound">mm</a> <a id="1272" href="Protocol.Streamlet.Local.Step.html#1181" class="Datatype Operator">]→</a> <a id="1275" href="Protocol.Streamlet.Global.Traces.html#1226" class="Bound">ls&#39;</a>
+
+<a id="LocalStepProperty"></a><a id="1280" href="Protocol.Streamlet.Global.Traces.html#1280" class="Function">LocalStepProperty</a> <a id="1298" class="Symbol">=</a> <a id="1300" href="Protocol.Streamlet.Global.Traces.html#1116" class="Record">Step</a> <a id="1305" class="Symbol">→</a> <a id="1307" href="Agda.Primitive.html#388" class="Primitive">Type</a>
+
+<a id="allLocalSteps"></a><a id="1313" href="Protocol.Streamlet.Global.Traces.html#1313" class="Function">allLocalSteps</a> <a id="1327" class="Symbol">:</a> <a id="1329" class="Symbol">(</a><a id="1330" href="Protocol.Streamlet.Global.State.html#1051" class="Generalizable">s′</a> <a id="1333" href="Prelude.Closures.html#666" class="Datatype Operator">↞—</a> <a id="1336" href="Protocol.Streamlet.Global.State.html#1049" class="Generalizable">s</a><a id="1337" class="Symbol">)</a> <a id="1339" class="Symbol">→</a> <a id="1341" href="Agda.Builtin.List.html#147" class="Datatype">List</a> <a id="1346" href="Protocol.Streamlet.Global.Traces.html#1116" class="Record">Step</a>
+<a id="1351" href="Protocol.Streamlet.Global.Traces.html#1313" class="Function">allLocalSteps</a> <a id="1365" class="Symbol">=</a> <a id="1367" class="Symbol">λ</a> <a id="1369" class="Keyword">where</a>
+  <a id="1377" class="Symbol">(_</a> <a id="1380" href="Prelude.Closures.html#689" class="InductiveConstructor Operator">∎</a><a id="1381" class="Symbol">)</a> <a id="1383" class="Symbol">→</a> <a id="1385" href="Agda.Builtin.List.html#184" class="InductiveConstructor">[]</a>
+  <a id="1390" class="Symbol">(_</a> <a id="1393" href="Prelude.Closures.html#709" class="InductiveConstructor Operator">⟨</a> <a id="1395" href="Protocol.Streamlet.Global.Step.html#1649" class="InductiveConstructor">LocalStep</a> <a id="1405" href="Protocol.Streamlet.Global.Traces.html#1405" class="Bound">st</a> <a id="1408" href="Prelude.Closures.html#709" class="InductiveConstructor Operator">⟩←—</a> <a id="1412" href="Protocol.Streamlet.Global.Traces.html#1412" class="Bound">tr</a><a id="1414" class="Symbol">)</a> <a id="1416" class="Symbol">→</a> <a id="1418" class="Symbol">(_</a> <a id="1421" href="Protocol.Streamlet.Global.Traces.html#1148" class="InductiveConstructor Operator">⊢</a> <a id="1423" href="Protocol.Streamlet.Global.Traces.html#1405" class="Bound">st</a><a id="1425" class="Symbol">)</a> <a id="1427" href="Agda.Builtin.List.html#199" class="InductiveConstructor Operator">∷</a> <a id="1429" href="Protocol.Streamlet.Global.Traces.html#1313" class="Function">allLocalSteps</a> <a id="1443" href="Protocol.Streamlet.Global.Traces.html#1412" class="Bound">tr</a>
+  <a id="1448" class="CatchallClause Symbol">(_</a><a id="1450" class="CatchallClause"> </a><a id="1451" href="Prelude.Closures.html#709" class="CatchallClause InductiveConstructor Operator">⟨</a><a id="1452" class="CatchallClause"> </a><a id="1453" class="CatchallClause Symbol">_</a><a id="1454" class="CatchallClause"> </a><a id="1455" href="Prelude.Closures.html#709" class="CatchallClause InductiveConstructor Operator">⟩←—</a><a id="1458" class="CatchallClause"> </a><a id="1459" href="Protocol.Streamlet.Global.Traces.html#1459" class="CatchallClause Bound">tr</a><a id="1461" class="CatchallClause Symbol">)</a> <a id="1463" class="Symbol">→</a> <a id="1465" href="Protocol.Streamlet.Global.Traces.html#1313" class="Function">allLocalSteps</a> <a id="1479" href="Protocol.Streamlet.Global.Traces.html#1459" class="Bound">tr</a>
+
+<a id="_∋⋯_"></a><a id="1483" href="Protocol.Streamlet.Global.Traces.html#1483" class="Function Operator">_∋⋯_</a> <a id="1488" class="Symbol">:</a> <a id="1490" href="Prelude.Closures.html#4109" class="Function">Trace</a> <a id="1496" class="Symbol">→</a> <a id="1498" href="Protocol.Streamlet.Global.Traces.html#1280" class="Function">LocalStepProperty</a> <a id="1516" class="Symbol">→</a> <a id="1518" href="Agda.Primitive.html#388" class="Primitive">Type</a>
+<a id="1523" class="Symbol">(_</a> <a id="1526" href="Agda.Builtin.Sigma.html#235" class="InductiveConstructor Operator">,</a> <a id="1528" class="Symbol">_</a> <a id="1530" href="Agda.Builtin.Sigma.html#235" class="InductiveConstructor Operator">,</a> <a id="1532" class="Symbol">_</a> <a id="1534" href="Agda.Builtin.Sigma.html#235" class="InductiveConstructor Operator">,</a> <a id="1536" href="Protocol.Streamlet.Global.Traces.html#1536" class="Bound">tr</a><a id="1538" class="Symbol">)</a> <a id="1540" href="Protocol.Streamlet.Global.Traces.html#1483" class="Function Operator">∋⋯</a> <a id="1543" href="Protocol.Streamlet.Global.Traces.html#1543" class="Bound">P</a> <a id="1545" class="Symbol">=</a> <a id="1547" href="Prelude.Anyable.html#184" class="Field">Any</a> <a id="1551" href="Protocol.Streamlet.Global.Traces.html#1543" class="Bound">P</a> <a id="1553" class="Symbol">(</a><a id="1554" href="Protocol.Streamlet.Global.Traces.html#1313" class="Function">allLocalSteps</a> <a id="1568" href="Protocol.Streamlet.Global.Traces.html#1536" class="Bound">tr</a><a id="1570" class="Symbol">)</a>
+</pre>
+</body>
+</html>
