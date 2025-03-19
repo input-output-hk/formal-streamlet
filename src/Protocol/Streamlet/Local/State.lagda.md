@@ -201,6 +201,18 @@ NotarizedChain-⊆ :
     NotarizedChain ms′ ch
 NotarizedChain-⊆ ms⊆ = L.All.map (NotarizedBlock-⊆ ms⊆)
 
+NotarizedChain-++⁺ˡ :
+  NotarizedChain ms ch
+  ─────────────────────────────
+  NotarizedChain (ms′ ++ ms) ch
+NotarizedChain-++⁺ˡ = NotarizedChain-⊆ (L.SubL.++⁺ˡ _ L.SubL.⊆-refl)
+
+NotarizedChain-++⁺ʳ :
+  NotarizedChain ms ch
+  ─────────────────────────────
+  NotarizedChain (ms ++ ms′) ch
+NotarizedChain-++⁺ʳ = NotarizedChain-⊆ (L.SubL.++⁺ʳ _ L.SubL.⊆-refl)
+
 ⊆-nch∈ :
   ∙ ms ⊆ ms′
   ∙ ch notarized-chain-∈ ms
@@ -216,6 +228,26 @@ Suffix-nch∈ :
 Suffix-nch∈ suf (ch∈ , nch)
   = Suffix-ch∈ suf ch∈
   , Suffix⇒All suf nch
+
+FinalizedChain-⊆ :
+  ∙ ms ⊆ ms′
+  ∙ FinalizedChain ms ch b
+    ───────────────────────
+    FinalizedChain ms′ ch b
+FinalizedChain-⊆ ms⊆ (Finalize nch e≡ e≡′) =
+  Finalize (NotarizedChain-⊆ ms⊆ nch) e≡ e≡′
+
+FinalizedChain-++⁺ˡ :
+  FinalizedChain ms ch b
+  ───────────────────────────────
+  FinalizedChain (ms′ ++ ms) ch b
+FinalizedChain-++⁺ˡ = FinalizedChain-⊆ (L.SubL.++⁺ˡ _ L.SubL.⊆-refl)
+
+FinalizedChain-++⁺ʳ :
+  FinalizedChain ms ch b
+  ───────────────────────────────
+  FinalizedChain (ms ++ ms′) ch b
+FinalizedChain-++⁺ʳ = FinalizedChain-⊆ (L.SubL.++⁺ʳ _ L.SubL.⊆-refl)
 ```
 -->
 
